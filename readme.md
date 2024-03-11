@@ -3,7 +3,7 @@ k3d cluster create wordpress-cluster-demo
 
 # Deploy wordpress
 kubectl apply -f ./src/db/01_mysql-pv.yaml
-kubectl apply -f ./src/db/02_mysql-deployment.yaml
+kubectl apply -f ./src/db/02_mysql-statefulset.yaml
 kubectl apply -f ./src/db/03_mysql-service.yaml
 
 kubectl apply -f ./src/wordpress/01_wordpress-pv.yaml
