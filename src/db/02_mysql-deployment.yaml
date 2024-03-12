@@ -1,36 +1,36 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Deployment # Indica que l'objecte que es crea és un Deployment.
 metadata:
-  name: mysql
+  name: mysql # Nom del Deployment, que serà utilitzat per referenciar-lo dins del clúster.
 spec:
-  replicas: 1
+  replicas: 1 # Nombre de còpies (répliques) del pod que es volen mantenir en execució.
   selector:
     matchLabels:
-      app: mysql
-  template:
+      app: mysql # Selector que defineix com el Deployment troba els pods a gestionar, basant-se en les etiquetes.
+  template: # Plantilla per a la creació dels pods.
     metadata:
       labels:
-        app: mysql
+        app: mysql # Etiquetes assignades als pods creats a partir d'aquesta plantilla.
     spec:
       containers:
-        - name: mysql
-          image: mysql:latest
-          env:
+        - name: mysql # Nom del contenidor dins del pod.
+          image: mysql:latest # Imatge de Docker que s'utilitzarà per aquest contenidor, en aquest cas, l'última versió de MySQL.
+          env: # Variables d'entorn que seran assignades dins del contenidor.
             - name: MYSQL_ROOT_PASSWORD
-              value: "password1234"
+              value: "password1234" # Contrasenya de l'usuari root de MySQL.
             - name: MYSQL_DATABASE
-              value: "wordpress"
+              value: "wordpress" # Nom de la base de dades que MySQL crearà al iniciar.
             - name: MYSQL_USER
-              value: "wpuser"
+              value: "wpuser" # Nom de l'usuari de MySQL que tindrà accés a la base de dades especificada.
             - name: MYSQL_PASSWORD
-              value: "password1234"
+              value: "password1234" # Contrasenya per a l'usuari de MySQL especificat anteriorment.
           ports:
-            - containerPort: 3306
+            - containerPort: 3306 # Port on el contenidor escoltarà, el port per defecte de MySQL.
               name: mysql
-          volumeMounts:
+          volumeMounts: # Punt de muntatge per als volums dins del contenidor.
             - name: mysql-pv-claim
-              mountPath: /var/lib/mysql
-      volumes:
+              mountPath: /var/lib/mysql # Directori dins del contenidor on es muntarà el volum.
+      volumes: # Definició dels volums que seran utilitzats pels contenidors.
         - name: mysql-pv-claim
           persistentVolumeClaim:
-            claimName: mysql-pv-claim
+            claimName: mysql-pv-claim # Especifica que aquest volum correspon a una reclamació de volum persistent (PVC) amb aquest nom.

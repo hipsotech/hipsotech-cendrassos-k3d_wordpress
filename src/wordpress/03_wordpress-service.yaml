@@ -1,12 +1,12 @@
 apiVersion: v1
-kind: Service
+kind: Service # Tipus d'objecte que s'està creant, en aquest cas un Service.
 metadata:
-  name: wordpress
+  name: wordpress # Nom del Service, utilitzat com a identificador dins del clúster.
 spec:
-  selector:
-    app: wordpress
+  selector: # Selector que defineix com el Service troba els pods als quals redirigir el tràfic.
+    app: wordpress # Utilitza l'etiqueta 'app' per seleccionar els pods que tenen aquesta etiqueta amb valor 'wordpress'.
     tier: frontend
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
+  ports: # Defineix la configuració del port per aquest servei.
+    - protocol: TCP # Especifica el protocol de la capa de transport, en aquest cas TCP.
+      port: 80 # El port en el qual el servei està escoltant. Aquest és el port al qual els clients es connecten.
+      targetPort: 80 # El port del pod al qual el servei enviarà el tràfic. Això ha de coincidir amb el port que la teva aplicació està escoltant dins del pod.

@@ -1,40 +1,40 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Deployment # Tipus d'objecte que s'està creant, en aquest cas un Deployment.
 metadata:
-  name: wordpress
+  name: wordpress # Nom del Deployment, utilitzat com a identificador dins del clúster.
 spec:
-  replicas: 4
+  replicas: 4 # Nombre de còpies del pod que es vol mantenir en execució.
   selector:
     matchLabels:
-      app: wordpress
+      app: wordpress # Selector que defineix com el Deployment troba els pods a gestionar.
       tier: frontend
   strategy:
-    type: Recreate
-  template:
+    type: Recreate # Estratègia de desplegament que indica eliminar tots els pods existents abans de crear de nous.
+  template: # Plantilla per a la creació dels pods.
     metadata:
       labels:
-        app: wordpress
-        tier: frontend
+        app: wordpress # Etiquetes assignades als pods creats.
+        tier: frontend 
     spec:
       containers:
-      - image: wordpress:latest
-        name: wordpress
-        env:
+      - image: wordpress:latest # Imatge de Docker que s'utilitza per al contenidor, en aquest cas, l'última versió de WordPress.
+        name: wordpress # Nom del contenidor dins del pod.
+        env: # Variables d'entorn per configurar WordPress.
         - name: WORDPRESS_DB_HOST
-          value: mysql
+          value: mysql # Nom de l'host de la base de dades, que correspon al nom del servei de MySQL.
         - name: WORDPRESS_DB_PASSWORD
-          value: "password1234"
+          value: "password1234" # Contrasenya per accedir a la base de dades.
         - name: WORDPRESS_DB_USER
-          value: "wpuser"
+          value: "wpuser" # Nom d'usuari per accedir a la base de dades.
         - name: WORDPRESS_DB_NAME
-          value: "wordpress"
+          value: "wordpress" # Nom de la base de dades de WordPress.
         ports:
-          - containerPort: 80
+          - containerPort: 80 # Port on s'executa el servei dins del contenidor.
             name: wordpress
-        volumeMounts:
+        volumeMounts: # Configuració dels punts de muntatge dels volums.
         - name: wordpress-pv-claim
-          mountPath: /var/www/html
-      volumes:
+          mountPath: /var/www/html # Directori dins del contenidor on es muntarà el volum d'emmagatzematge persistent.
+      volumes: # Definició dels volums que seran utilitzats pels contenidors.
       - name: wordpress-pv-claim
         persistentVolumeClaim:
-          claimName: wordpress-pv-claim
+          claimName: wordpress-pv-claim # Especifica la Reclamació de Volum Persistent (PVC) que s'utilitzarà.

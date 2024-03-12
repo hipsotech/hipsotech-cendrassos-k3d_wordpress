@@ -1,10 +1,9 @@
 apiVersion: v1
-kind: Service
+kind: Service # Indica que l'objecte que es crea és un Service.
 metadata:
-  name: mysql
+  name: mysql # Nom del Service, que serà utilitzat per referenciar-lo dins del clúster.
 spec:
   ports:
-    - port: 3306
+    - port: 3306 # Defineix el port sobre el qual el servei estarà escoltant.
   selector:
-    app: mysql
-  clusterIP: None
+    app: mysql # Selector que defineix com el Service troba els pods a redirigir el tràfic, basant-se en les etiquetes.
