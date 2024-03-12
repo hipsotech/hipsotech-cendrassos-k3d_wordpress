@@ -22,7 +22,7 @@ kubectl apply -f ./src/wordpress/02_wordpress-deployment.yaml
 
 kubectl apply -f ./src/wordpress/03_wordpress-service.yaml
 
-### Ara nomes queda exposar  el servei
+### Ara nomes queda exposar  el servei en un port local
 
 kubectl port-forward service/wordpress 8080:80
 
