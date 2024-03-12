@@ -8,7 +8,7 @@ k3d cluster create wordpress-cluster-demo
 
 ### Despleguem la base de dades MySQL
 
-kubectl apply -f ./src/db/01_mysql-pv.yaml
+kubectl apply -f ./src/db/01_mysql-pvc.yaml
 
 kubectl apply -f ./src/db/02_mysql-deployment.yaml
 
@@ -16,7 +16,7 @@ kubectl apply -f ./src/db/03_mysql-service.yaml
 
 ### Tot seguit desplegarem el Wordpress
 
-kubectl apply -f ./src/wordpress/01_wordpress-pv.yaml
+kubectl apply -f ./src/wordpress/01_wordpress-pvc.yaml
 
 kubectl apply -f ./src/wordpress/02_wordpress-deployment.yaml
 
@@ -24,7 +24,7 @@ kubectl apply -f ./src/wordpress/03_wordpress-service.yaml
 
 ### Ara nomes queda exposar  el servei
 
-kubectl port-forward service/wordpress-service 8080:80
+kubectl port-forward service/wordpress 8080:80
 
 ### Esborrem el cluster de prova
 

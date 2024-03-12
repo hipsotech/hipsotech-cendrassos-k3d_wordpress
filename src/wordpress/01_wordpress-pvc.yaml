@@ -1,0 +1,10 @@
+apiVersion: v1 # La versió de l'API de Kubernetes que s'utilitza per aquest objecte. 'v1' és la versió per a objectes estables com els PVCs.
+kind: PersistentVolumeClaim # Especifica el tipus d'objecte que s'està creant, en aquest cas un PVC.
+metadata:
+  name: wordpress-pv-claim # El nom del PVC. Això és com es referenciarà dins del clúster.
+spec:
+  accessModes:
+    - ReadWriteOnce # Defineix els modes d'accés per al volum. 'ReadWriteOnce' significa que el volum pot ser muntat com a lectura i escriptura per un únic node.
+  resources:
+    requests:
+      storage: 1Gi # Especifica la quantitat d'emmagatzematge que es sol·licita. '1Gi' indica 1 Gibibyte.

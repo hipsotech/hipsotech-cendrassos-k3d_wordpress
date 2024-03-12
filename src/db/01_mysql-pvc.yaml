@@ -1,0 +1,13 @@
+# Les PVCs permeten a l'usuari reclamar recursos d'emmagatzematge específics definits segons les seves necessitats.
+apiVersion: v1 # La versió de l'API de Kubernetes que s'utilitza per aquest objecte, 'v1' indica que és una versió estable.
+kind: PersistentVolumeClaim # Especifica el tipus d'objecte que s'està creant, en aquest cas un PVC.
+metadata:
+  name: mysql-pv-claim # Nom del PVC, utilitzat com a identificador únic dins del clúster de Kubernetes.
+spec:
+  accessModes:
+    - ReadWriteOnce  # El mode d'accés per al volum. 'ReadWriteOnce' indica que el volum pot ser muntat com a lectura i escriptura per un sol node al mateix temps.
+  resources:
+    requests:
+      storage: 1Gi # La quantitat d'emmagatzematge sol·licitada per aquest PVC, en aquest cas, 1 Gibibyte.
+
+
